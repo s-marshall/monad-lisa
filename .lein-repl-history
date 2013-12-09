@@ -1,0 +1,325 @@
+(get-next-state "1" 1)
+(get-next-state "\" 1)
+)
+(get-next-state "\0" 1)
+)
+"
+)
+(get-next-state (first "0") 1)
+(get-next-state (first "1") 1)
+(get-next-state (first "1") 2)
+(get-next-state (first "0") 2)
+(run-machine "0000" 1)
+(run-machine "00100" 1)
+(run-machine "0010" 1)
+(defn state-machine [input state fsm-table]
+  ((domonad state-m
+    [current-state  (set-state state)
+     next-state     (update-state (partial fsm-table input))]
+    [input next-state]) state))
+;     next-state     (update-state (partial get-next-state input))]
+(defn get-state [result] (second result))
+    
+(defn run-machine [input state fsm-table]
+  (if (> (count input) 0)
+    (let [char (first input)
+        result (state-machine char state fsm-table)]
+      (run-machine (rest input) (get-state result)))
+    
+    state))
+    
+(run-machine "0000" 1 odd-even)
+(odd-even (first "0") 1)
+ 
+(defn odd-even [input current-state]
+  (condp = [input current-state]
+    [\1 1] 1
+    [\0 1] 2
+    [\1 2] 2
+    [\0 2] 1
+    nil))
+(odd-even (first "0") 1)
+(run-machine "0000" 1 odd-even)
+(odd-even (first "0") 0)
+(odd-even (first "0") 1)
+(odd-even (first "0") 2)
+(run-machine "0000" 1 odd-even)
+(defn odd-even [input current-state]
+  (condp = [input current-state]
+    [\1 1] 1
+    [\0 1] 2
+    [\1 2] 2
+    [\0 2] 1
+    nil))
+    
+(defn state-machine [input state fsm-table]
+  ((domonad state-m
+    [current-state  (set-state state)
+     next-state     (update-state (partial fsm-table input))]
+    [input next-state]) state))
+;     next-state     (update-state (partial get-next-state input))]
+(defn get-state [result] (second result))
+    
+(defn run-machine [input state fsm-table]
+  (if (> (count input) 0)
+    (let [char (first input)
+        result (state-machine char state fsm-table)]
+      (run-machine (rest input) (get-state result)))
+    
+    state))
+    
+(run-machine "0000" 1 odd-even)
+(odd-even (first "00") 1)
+(defn run-machine [input state fsm-table]
+  (if (> (count input) 0)
+    (let [char (first input)
+        result (state-machine char state fsm-table)]
+      (run-machine (rest input) (get-state result) fsm-table))
+    
+    state))
+    
+(run-machine "0000" 1 odd-even)
+(run-machine "0001" 1 odd-even)
+(run-machine "0001010101010101000001101" 1 odd-even)
+(defn run-machine [input state fsm-table]
+  (if (> (count input) 0)
+    (let [char (first input)
+        result (state-machine char state fsm-table)]
+      (run-machine (rest input) (get-state result) fsm-table))
+    
+    (condp = state
+      1 "EVEN"
+      "ODD")
+    ))
+    
+(run-machine "0000" 1 odd-even)
+(run-machine "000" 1 odd-even)
+(defn odd-even [input current-state]
+  (condp = [input current-state]
+    [\1 :even] :even
+    [\0 :even] :odd
+    [\1 :odd] :odd
+    [\0 :odd] :even
+    nil))
+    
+(defn state-machine [input state fsm-table]
+  ((domonad state-m
+    [current-state  (set-state state)
+     next-state     (update-state (partial fsm-table input))]
+    [input next-state]) state))
+;     next-state     (update-state (partial get-next-state input))]
+(defn get-state [result] (second result))
+    
+(defn run-machine [input state fsm-table]
+  (if (> (count input) 0)
+    (let [char (first input)
+        result (state-machine char state fsm-table)]
+      (run-machine (rest input) (get-state result) fsm-table))
+    
+    state))
+    
+(run-machine "0000" 1 odd-even)
+(run-machine "0000" :even odd-even)
+(run-machine "00001" :even odd-even)
+(run-machine "00001" :odd odd-even)
+(defn odd-even [input current-state]
+  (condp = [input current-state]
+    [\1 1] 1
+    [\0 1] 2
+    [\1 2] 2
+    [\0 2] 1
+    nil))
+    
+(defn state-machine [input state fsm-table]
+  ((domonad state-m
+    [current-state  (set-state state)
+     next-state     (update-state (partial fsm-table input))]
+    [input next-state]) state))
+;     next-state     (update-state (partial get-next-state input))]
+(defn get-state [result] (second result))
+    
+(defn run-machine [input state fsm-table]
+  (if (> (count input) 0)
+    (let [char (first input)
+        result (state-machine char state fsm-table)]
+      (run-machine (rest input) (get-state result) fsm-table))
+    
+    state))
+    
+(cond = (run-machine "0000" 1 odd-even)
+  1 "Even"
+  "Odd")
+(condp = (run-machine "0000" 1 odd-even)
+  1 "Even"
+  "Odd")
+(condp = (run-machine "0000" 1 odd-even)
+)
+(defn zero-count [binary-string]
+  (condp = (run-machine binary-string 1 odd-even)
+    1 "Even"
+      "Odd"))
+      
+(zero-count "1010")
+(zero-count "10100")
+(zero-count "101001010101010000")
+(zero-count "1010010101010100000")
+    
+(defn nice-table [input current-state]
+  (condp = [input current-state]
+    [\n 1] 2
+    [\i 2] 3
+    [\c 3] 4
+    [\e 4] :success
+    :fail)) 
+(run-machine "nice" 1 nice-table)
+(run-machine "nick" 1 nice-table)
+(defn just-nice [word]
+  (condp = (run-machine word 1 nice-table)
+    :success "this word is nice"
+    "this word is not nice"))
+(just-nice "nice")
+(just-nice "nick")
+(defn get-next-state [table input current-state]
+  (table input current-state))
+      
+(defn nice-table [input current-state]
+  (condp = [input current-state]
+    [\n 1] 2
+    [\i 2] 3
+    [\c 3] 4
+    [\e 4] :success
+    :fail)) 
+  
+(defn odd-even-table [input current-state]
+  (condp = [input current-state]
+    [\1 1] 1
+    [\0 1] 2
+    [\1 2] 2
+    [\0 2] 1
+    nil))
+    
+(defn state-machine [input state fsm-table]
+  ((domonad state-m
+    [current-state  (set-state state)
+;     next-state     (update-state (partial fsm-table input))]
+     next-state     (update-state (partial get-next-state fsm-table input))]
+    [input next-state]) state))
+(defn get-state [result] (second result))
+    
+(defn run-machine [input state fsm-table]
+  (if (> (count input) 0)
+    (let [char (first input)
+        result (state-machine char state fsm-table)]
+      (run-machine (rest input) (get-state result) fsm-table))
+    
+    state))
+    
+(defn zero-count [binary-string]
+  (condp = (run-machine binary-string 1 odd-even-table)
+    1 "even"
+      "odd"))
+      
+(defn just-nice [word]
+  (condp = (run-machine word 1 nice-table)
+    :success "this word is nice"
+    "this word is not nice"))
+(zero-count "10100")
+(zero-count "101000")
+(just-nice "nice")
+(just-nice "nicce")
+(just-nice "nick")
+(zero-count "0012")
+(defn zero-count [binary-string]
+  (condp = (run-machine binary-string 1 odd-even-table)
+    1 "even"
+    2  "odd"
+    "Unknown character in string"))
+(zero-count "1011")
+(zero-count "10110")
+(zero-count "101130")
+(defn zero-count [binary-string]
+  (condp = (run-machine binary-string 1 odd-even-table)
+    1 "even"
+    2  "odd"
+    "Error: The binary string should only contains ones and zeros!"))
+      
+(defn just-nice [word]
+  (condp = (run-machine word 1 nice-table)
+    :success "this word is nice"
+    "this word is not nice"))
+(zero-count "0010003")
+(defn zero-count [binary-string]
+  (condp = (run-machine binary-string 1 odd-even-table)
+    1 "even"
+    2  "odd"
+    "Error: The binary string should only contain ones and zeros!"))
+      
+(defn just-nice [word]
+  (condp = (run-machine word 1 nice-table)
+    :success "This word is nice!"
+    "This is not nice."))
+(just-nice "nice")
+(just-nice "nicce")
+(just-nice "nicer")
+    (is (= (odd-even-table \1 1) 1))
+    (is (= (odd-even-table \0 1) 2))
+    (is (= (odd-even-table \1 2) 2))
+    (is (= (odd-even-table \0 2) 1))
+(defn nice-table [input current-state]
+  (condp = [input current-state]
+    [\n 1] 2
+    [\i 2] 3
+    [\c 3] 4
+    [\e 4] :success
+    :fail)) 
+  
+(defn odd-even-table [input current-state]
+  (condp = [input current-state]
+    [\1 1] 1
+    [\0 1] 2
+    [\1 2] 2
+    [\0 2] 1
+    nil))
+(defn get-next-state [table input current-state]
+  (table input current-state))
+(defn state-machine [input state fsm-table]
+  ((domonad state-m
+    [current-state  (set-state state)
+     next-state     (update-state (partial get-next-state fsm-table input))]
+    [input next-state]) state))
+(defn get-fsm-state [result] (second result))
+    
+(defn run-machine [input state fsm-table]
+  (if (> (count input) 0)
+    (let [char (first input)
+        result (state-machine char state fsm-table)]
+      (run-machine (rest input) (get-fsm-state result) fsm-table))
+    
+    state))
+    
+(defn zero-count [binary-string]
+  (condp = (run-machine binary-string 1 odd-even-table)
+    1 "even"
+    2  "odd"
+    "Error: The binary string should only contain ones and zeros!"))
+      
+(defn just-nice [word]
+  (condp = (run-machine word 1 nice-table)
+    :success "This word is nice!"
+    "This is not nice."))
+(just-nice "lice")
+(just-nice "nice")
+(just-nice "splice")
+(just-nice "splicel")
+(zero-count "01001010101")
+(zero-count "0100101011")
+(zero-test "011101010")
+(zero-count "011101010")
+(zero-count "0111010100")
+(just-nice "nice")
+(just-nice "nicee")
+(char "n")
+(first "n")
+\n
+(char "a")
+(test)
