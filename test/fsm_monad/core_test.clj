@@ -8,7 +8,7 @@
     (is (= (nice-table (first "i") 2) 3))
     (is (= (nice-table (first "c") 3) 4))
     (is (= (nice-table (first "e") 4) :success))
-    (is (= (nice-table (first "l") 1) :fail))))
+    (is (= (nice-table (first "l") 1) :error))))
 
 (deftest odd-even-table-test
   (testing "fsm table for counting zeros"

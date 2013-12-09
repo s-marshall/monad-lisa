@@ -32,7 +32,7 @@ This finite state machine only accepts the word "nice."
 | 2 | i | 3 |
 | 3 | c | 4 |
 | 4 | e | :success |
-| * | * | :fail |
+| * | * | :error |
 
 ## Usage
 

@@ -1,5 +1,5 @@
 (ns fsm-monad.core
-  (:use [clojure.algo.monads :as monads]))
+  (:use clojure.algo.monads))
 
 (defn nice-table [input current-state]
   (condp = [input current-state]
@@ -7,7 +7,7 @@
     [\i 2] 3
     [\c 3] 4
     [\e 4] :success
-    :fail)) 
+    :error)) 
   
 (defn odd-even-table [input current-state]
   (condp = [input current-state]
@@ -38,7 +38,7 @@
 (defn zero-count [binary-string]
   (condp = (run-machine binary-string 1 odd-even-table)
     1 "even"
-    2  "odd"
+    2 "odd"
     "Error: The binary string should only contain ones and zeros!"))
       
 (defn just-nice [word]
