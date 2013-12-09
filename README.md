@@ -8,7 +8,7 @@ The examples can be found on the [Finite-state machine](http://en.wikipedia.org/
 
 ### Odd or even zero count
 
-This finite state machine returns "even" or "odd" to indicate an odd or an even number of zeros in a binary string.
+This finite state machine returns 1 or 2 to indicate an even or an odd number of zeros in a binary string.
 
 ![alt text](http://upload.wikimedia.org/wikipedia/commons/9/9d/DFAexample.svg "Odd/even zero count finite state machine")
 
