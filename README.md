@@ -4,7 +4,7 @@ These examples use the state-m monad defined in [algo.monads](https://github.com
 
 The examples can be found on the [Finite-state machine](http://en.wikipedia.org/wiki/Finite-state_machine) page in Wikipedia.
 
-## Finite state machine tables
+## Finite state machines
 
 ### Odd or even zero count
 
