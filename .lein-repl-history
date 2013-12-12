@@ -1,0 +1,4 @@
+(zero-detector "101001100")
+(zero-detector-with-counter "101001100")
+(zero-detector-with-counter "1010011010101010")
+(zero-detector-with-counter "10100110101010102")

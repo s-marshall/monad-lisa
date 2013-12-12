@@ -9,12 +9,20 @@
     [\e 4] :success
     :error)) 
   
-(defn odd-even-table [input current-state]
+(defn odd-even-detector-table [input current-state]
   (condp = [input current-state]
     [\1 1] 1
     [\0 1] 2
     [\1 2] 2
     [\0 2] 1
+    nil))
+    
+(defn odd-even-detector-and-counter-table [input current-state]
+  (condp = [input (first current-state)]
+    [\1 1] [1 (second current-state)]
+    [\0 1] [2 (inc (second current-state))]
+    [\1 2] [2 (second current-state)]
+    [\0 2] [1 (inc (second current-state))]
     nil))
 
 (defn get-next-state [table input current-state]
@@ -35,12 +43,19 @@
       (run-machine (rest input) (get-fsm-state result) fsm-table))
     state))
     
-(defn zero-count [binary-string]
-  (condp = (run-machine binary-string 1 odd-even-table)
+(defn zero-detector [binary-string]
+  (condp = (run-machine binary-string 1 odd-even-detector-table)
     1 "even"
     2 "odd"
     "Error: The binary string should only contain ones and zeros!"))
       
+(defn zero-detector-with-counter [binary-string]
+  (let [result (run-machine binary-string [1 0] odd-even-detector-and-counter-table)]
+    (condp = (first result) 
+      1 ["even" (second result)]
+      2 ["odd" (second result)]
+    "Error: The binary string should only contain ones and zeros!")))
+
 (defn just-nice [word]
   (condp = (run-machine word 1 nice-table)
     :success "This word is nice!"
