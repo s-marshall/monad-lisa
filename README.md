@@ -25,7 +25,7 @@ In this finite state machine, the state is represented by an integer, but the st
 You may want to know the number of zeros in addition to whether the zero count is an odd or an even number. This is easy to do by changing the data structure of the
 state and modifying the table of the finite state machine.
 The new representation of the state is a vector. In this vector [state zero-count], the first element is an integer that represents the state, and
-the second element is an integer that represents the number of zeros. The state table of the new finite state machine that can count as well as detect odd or even is shown below.
+the second element is an integer that represents the number of zeros. The state table of this new finite state machine that can count as well as detect odd or even is shown below.
 
 | State | Input | Next State|
 |:-----:|:-----:|:---------:|
